@@ -15,6 +15,8 @@
 # BoardConfig.mk
 #
 
+
+
 ## Kernel, bootloader etc.
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
@@ -33,11 +35,18 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a5
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/msm7x27a-common/include
 
-TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a5 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a5 -mfpu=neon -mfloat-abi=softfp
+
+# Compiler Optimization
+ARCH_ARM_HIGH_OPTIMIZATION := true
+ARCH_ARM_HIGH_OPTIMIZATION_COMPAT := true
+
+# Optimisations used by Qualcomm
+TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
 ## Allow compatibility with older recoveries
 SKIP_SET_METADATA := true
@@ -66,6 +75,7 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_NO_SECURE_PLAYBACK
 TARGET_PROVIDES_LIBAUDIO := true
 TARGET_QCOM_AUDIO_VARIANT := legacy
 BOARD_USES_LEGACY_ALSA_AUDIO := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_DIRECTTRACK -DNO_TUNNELED_SOURCE
 
 ## EGL, graphics
 USE_OPENGL_RENDERER := true
@@ -115,6 +125,10 @@ BOARD_VOLD_MAX_PARTITIONS := 24
 ## UMS
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
+
+
+## Legacy touchscreen support
+BOARD_USE_LEGACY_TOUCHSCREEN := true
 
 ## Samsung has weird framebuffer
 TARGET_NO_INITLOGO := true
